@@ -1,4 +1,7 @@
 ﻿/*Home page*/
+.bodymain {
+    padding-left: 20px;
+}
 .home-banner-area {
     background-image: url('../image/homebanner.jpg');
     background-position: center center;
