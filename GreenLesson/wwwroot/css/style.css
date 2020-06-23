@@ -95,9 +95,11 @@
 }
 
 .course-carousel-area .course-carousel-title {
-        font-size: 20px;
+        padding-bottom: 30px;
+        float: left;
+        font-size: 25px;
         color: #505763;
-        margin: 0 0 10px;
+      
     }
 
 .course-carousel-area .slick-slider {
@@ -255,6 +257,7 @@
     .course-box .course-details {
         padding: 15px 10px 0px 15px;
         position: relative;
+        padding-bottom: 20px;
     }
 
         .course-box .course-details .title {
@@ -325,15 +328,15 @@
                     margin-left: 5px;
                 }
 
-        .course-box .course-details .price {
-            padding-bottom: 15px;
+        .course-box .course-details .category {
+            padding-top: 35px;
             color: #29303b;
             font-size: 18px;
             font-weight: 600;
             margin-right: 10px;
         }
 
-            .course-box .course-details .price small {
+            .course-box .course-details .category small {
                 color: #686f7a;
                 font-weight: 400;
                 font-size: 13px;
@@ -541,4 +544,31 @@
 .course-box:hover .course-image:before {
     opacity: 1;
     visibility: visible;
+}
+
+.course-box .course-details .instructors .name {
+    display: block !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -moz-line-clamp: 1;
+    -ms-line-clamp: 1;
+    -o-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    -o-box-orient: vertical;
+    box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    min-height: 21px;
+    height: 21px;
+    font-size: 12px;
+    color: #686f7a;
+    margin-bottom: 5px;
+}
+.course-box .course-details .instructors .rating {
+    float: right;
+    color:#a1a7b3;
 }

@@ -72,6 +72,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-10">
                 <h2 class="course-carousel-title">Khoá Học mới nhất</h2>
+                </div>
                 <div class="container">
                     <div class="row">
                         @foreach (var item in listKhoaHocMoi)
@@ -87,8 +88,17 @@
                                                 <div class="course-details">
                                                     <h5 class="title">@Html.DisplayFor(modelItem => item.Title)</h5>
                                                     <p class="instructors">
-                                                        <!-- @Html.DisplayFor(modelItem => item.UserId)-->
+                                                        @Html.DisplayFor(modelItem => item.UserId)
+                                                        
+                                                        <span class="rating">
+                                                            <i class="fas fa-star filled"></i>&nbsp
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star filled"></i>
+                                                        </span>
                                                     </p>
+                                                    <p class="category text-right">Danh mục bài giảng</p>
                                                 </div>
                                             </div>
                                         </a>

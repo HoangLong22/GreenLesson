@@ -8,6 +8,7 @@ using GreenLesson.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace GreenLesson.Controllers
 {
