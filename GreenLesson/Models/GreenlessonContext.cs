@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -34,6 +35,11 @@ namespace GreenLesson.Models
                 }
                 optionsBuilder.UseSqlServer(GetConnection.GetConnectionString());
             }
+        }
+
+        internal SqlConnection getConnection()
+        {
+            throw new NotImplementedException();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

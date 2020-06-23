@@ -3,59 +3,60 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="bodymain">
+    <h1>Index</h1>
 
-<h1>Index</h1>
+    <p>
+        <a asp-action="Create">Thêm bài học</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Contents)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SectionName)
+                </th>
+                <th>Tác vụ</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contents)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SectionName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit" style="color:forestgreen;"></i></a> |
+                        <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt" style="color: red;"></i></a>
+                    </td>
 
-<p>
-    <a asp-action="Create">Thêm bài học</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Contents)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SectionName)
-            </th>
-            <th>Tác vụ</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contents)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SectionName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit" style="color:forestgreen;"></i></a> |
-                <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i></a> |
-                <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash-alt" style="color: red;"></i></a>
-            </td>
-
-        </tr>
-        }
-    </tbody>
-</table>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>

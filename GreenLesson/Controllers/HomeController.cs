@@ -18,8 +18,10 @@ namespace GreenLesson.Controllers
         {
             _env = environment;
         }
+        GreenlessonContext db = new GreenlessonContext();
         public IActionResult Index()
         {
+            ViewBag.KhoaHocMoi = db.Course.OrderByDescending(c => c.Id).Take(5).ToList();
             return View();
         }
 

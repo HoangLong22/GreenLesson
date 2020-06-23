@@ -10,6 +10,7 @@ namespace GreenLesson.Models
             Lesson = new HashSet<Lesson>();
         }
 
+        public static int Count { get; internal set; }
         public int Id { get; set; }
         public string Title { get; set; }
         public string ShortDescription { get; set; }
@@ -18,6 +19,11 @@ namespace GreenLesson.Models
         public int UserId { get; set; }
         public string Thumbnail { get; set; }
         public int Status { get; set; }
+
+        internal static object Include(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual Category Category { get; set; }
         public virtual Users User { get; set; }

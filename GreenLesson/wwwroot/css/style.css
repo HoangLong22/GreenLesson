@@ -1,6 +1,7 @@
 ﻿/*Home page*/
-.bodymain {
-    padding-left: 20px;
+.pb-3 .bodymain {
+    padding-left: 50px;
+    padding-right: 50px;
 }
 .home-banner-area {
     background-image: url('../image/homebanner.jpg');
@@ -86,3 +87,5 @@
     font-size: 15px;
     margin-bottom: 0;
 }
+
+

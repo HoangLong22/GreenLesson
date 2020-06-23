@@ -1,8 +1,11 @@
-﻿@{
+﻿@model IEnumerable<CoursesViewModel>
+@using GreenLesson.Models;
+@{
     ViewData["Title"] = "Home Page";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
+    List<Course> listKhoaHocMoi = ViewBag.KhoaHocMoi;
+
+}
 <section class="home-banner-area">
     <div class="container-lg">
         <div class="row">
@@ -61,3 +64,354 @@
         </div>
     </div>
 </section>
+
+<section class="course-carousel-area">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col">
+                <h2 class="course-carousel-title"><?php echo get_phrase('top').' 10 '.get_phrase('khóa_học_mới_nhất'); ?></h2>
+                <div class="course-carousel">
+                    @foreach (var item in listKhoaHocMoi)
+                    {
+                        <div class="course-box-wrap">
+                            <a asp-action="Details" asp-route-id="@item.Id">
+                                <div class="course-box">
+                                    <div class="course-image">
+                                        <img src="~/Uploads/@item.Thumbnail" alt="" class="img-fluid" style="width:250px;">
+                                    </div>
+                                    <div class="course-details">
+                                        <h5 class="title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                                        <p class="instructors">
+                                            @Html.DisplayFor(modelItem => item.UserId)
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .course-carousel-area {
+        margin-bottom: 20px;
+        overflow-x: hidden;
+    }
+
+        .course-carousel-area .course-carousel-title {
+            font-size: 20px;
+            color: #505763;
+            margin: 0 0 10px;
+        }
+
+        .course-carousel-area .slick-slider {
+            width: calc( 100% + 16px );
+            margin-left: -8px;
+        }
+
+        .course-carousel-area .slick-list:before,
+        .course-carousel-area .slick-list:after {
+            position: absolute;
+            content: "";
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 8px;
+            background: #f7f8fa;
+            z-index: 1;
+        }
+
+        .course-carousel-area .slick-list:after {
+            right: auto;
+            left: 0
+        }
+
+    .course-carousel .slick-prev:hover,
+    .course-carousel .slick-next:hover {
+        box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);
+    }
+
+    .course-carousel .slick-prev:focus,
+    .course-carousel .slick-next:focus {
+        box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1) !important;
+    }
+
+    .course-carousel .slick-prev,
+    .course-carousel .slick-next {
+        width: 47px;
+        height: 47px;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+        z-index: 1;
+        top: calc( 50% - 25px);
+    }
+
+    .course-carousel .slick-prev {
+        left: -28px;
+    }
+
+        .course-carousel .slick-prev.slick-disabled,
+        .course-carousel .slick-next.slick-disabled {
+            opacity: 0;
+        }
+
+        .course-carousel .slick-prev:before {
+            content: url(../img/icons/prev_arrow.png);
+            line-height: 0;
+            opacity: 1
+        }
+
+    .course-carousel .slick-next {
+        right: -15px
+    }
+
+        .course-carousel .slick-next:before {
+            content: url(../img/icons/next_arrow.png);
+            line-height: 0;
+            opacity: 1;
+        }
+
+    .course-box-wrap:focus {
+        outline: none;
+    }
+
+    .course-box-wrap {
+        padding: 0 8px;
+        margin-bottom: 20px;
+    }
+
+        .course-box-wrap a {
+            color: #fff;
+        }
+
+            .course-box-wrap a:hover {
+                text-decoration: none;
+            }
+
+    .course-box {
+        position: relative;
+        background: #fff;
+    }
+
+        .course-box:before,
+        .course-box:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            will-change: opacity;
+            transition: .2s ease;
+            -webkit-transition: .2s ease;
+            -ms-webkit-transition: .2s ease;
+            z-index: -1;
+        }
+
+        .course-box:before {
+            opacity: 1;
+            box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+            -webkit-box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+            -ms-webkit-box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+        }
+
+        .course-box:after {
+            opacity: 0;
+            box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);
+            -webkit-box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);
+            -ms-webkit-box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);
+        }
+
+        .course-box:hover:before {
+            opacity: 0;
+        }
+
+        .course-box:hover:after {
+            opacity: 1;
+        }
+
+        .course-box .play-btn {
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: url(../img/icons/icon-play.svg) no-repeat;
+            background-size: auto 40%;
+            background-position: 50%;
+            visibility: hidden;
+            opacity: 0;
+            -webkit-transition: .2s;
+            -moz-transition: .2s;
+            -o-transition: .2s;
+            transition: .2s;
+            z-index: 1
+        }
+
+        .course-box .course-image:hover > .play-btn {
+            -webkit-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            -o-transform: scale(1.2);
+            transform: scale(1.2);
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .course-box .course-details {
+            padding: 15px 10px 0px 15px;
+            position: relative;
+        }
+
+            .course-box .course-details .title {
+                display: block !important;
+                display: -webkit-box !important;
+                -webkit-line-clamp: 2;
+                -moz-line-clamp: 2;
+                -ms-line-clamp: 2;
+                -o-line-clamp: 2;
+                line-clamp: 2;
+                -webkit-box-orient: vertical;
+                -moz-box-orient: vertical;
+                -ms-box-orient: vertical;
+                -o-box-orient: vertical;
+                box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: normal;
+                font-weight: 600;
+                height: 36px;
+                min-height: 42px;
+                font-size: 15px;
+                color: #29303b;
+                margin-bottom: 10px;
+                line-height: 20px;
+            }
+
+            .course-box .course-details .instructors {
+                display: block !important;
+                display: -webkit-box !important;
+                -webkit-line-clamp: 1;
+                -moz-line-clamp: 1;
+                -ms-line-clamp: 1;
+                -o-line-clamp: 1;
+                line-clamp: 1;
+                -webkit-box-orient: vertical;
+                -moz-box-orient: vertical;
+                -ms-box-orient: vertical;
+                -o-box-orient: vertical;
+                box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: normal;
+                min-height: 21px;
+                height: 21px;
+                font-size: 12px;
+                color: #686f7a;
+                margin-bottom: 5px;
+            }
+
+            .course-box .course-details .rating {
+                margin-bottom: 10px;
+            }
+
+                .course-box .course-details .rating i {
+                    font-size: 11px;
+                }
+
+                .course-box .course-details .rating .rating-number {
+                    color: #29303b;
+                    margin-bottom: 0;
+                    font-size: 12px;
+                }
+
+                    .course-box .course-details .rating .rating-number span {
+                        font-weight: 600;
+                        color: #a1a7b3;
+                        margin-left: 5px;
+                    }
+
+            .course-box .course-details .price {
+                padding-bottom: 15px;
+                color: #29303b;
+                font-size: 18px;
+                font-weight: 600;
+                margin-right: 10px;
+            }
+
+                .course-box .course-details .price small {
+                    color: #686f7a;
+                    font-weight: 400;
+                    font-size: 13px;
+                    margin-right: 5px;
+                    text-decoration: line-through;
+                }
+
+            .course-box .course-details .completed-percent .progress-bar {
+                background: #007791;
+            }
+
+            .course-box .course-details .completed-percent .progress {
+                border-radius: 0;
+                height: 2px;
+                background-color: rgba(41,48,59,.25);
+            }
+
+            .course-box .course-details .completed-percent {
+                margin-top: 10px;
+                padding-bottom: 30px;
+            }
+
+                .course-box .course-details .completed-percent .text {
+                    width: 50%;
+                    color: #686f7a;
+                    font-size: 13px;
+                }
+
+            .course-box .course-details .your-rating-box {
+                position: absolute;
+                right: 10px;
+                bottom: 3px;
+                margin-bottom: 0;
+                z-index: 1;
+                text-align: right;
+            }
+
+                .course-box .course-details .your-rating-box .your-rating-text {
+                    margin-bottom: 0;
+                    font-size: 13px;
+                    color: #29303b;
+                    margin-top: 2px;
+                }
+
+                .course-box .course-details .your-rating-box:hover .your-rating-text {
+                    color: #ec5252;
+                }
+
+                .course-box .course-details .your-rating-box .your-rating-text .edit {
+                    display: none;
+                }
+
+                .course-box .course-details .your-rating-box:hover .your-rating-text .edit {
+                    display: unset;
+                }
+
+                .course-box .course-details .your-rating-box:hover .your-rating-text .your {
+                    display: none;
+                }
+
+                .course-box .course-details .your-rating-box i {
+                    color: transparent;
+                    text-stroke: 1px #eaeaea;
+                    -webkit-text-stroke: 1px #eaeaea;
+                    font-size: 17px;
+                    letter-spacing: -0.1em;
+                }
+
+                    .course-box .course-details .your-rating-box i.filled {
+                        color: #f4c150;
+                    }
+</style>
