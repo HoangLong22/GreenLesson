@@ -21,7 +21,7 @@ namespace GreenLesson.Controllers
         GreenlessonContext db = new GreenlessonContext();
         public IActionResult Index()
         {
-            ViewBag.KhoaHocMoi = db.Course.OrderByDescending(c => c.Id).Take(5).ToList();
+            ViewBag.KhoaHocMoi = db.Course.OrderByDescending(c => c.Id).Take(4).ToList();
             return View();
         }
 
