@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace GreenLesson.Models
 {
@@ -19,7 +21,6 @@ namespace GreenLesson.Models
         public int UserId { get; set; }
         public string Thumbnail { get; set; }
         public int Status { get; set; }
-
         internal static object Include(Func<object, object> p)
         {
             throw new NotImplementedException();
@@ -31,14 +32,16 @@ namespace GreenLesson.Models
     }
 
 
-    public class CoursesViewModel
+    public partial class CoursesViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Thumbnail { get; set; }
-        public string CategoryName { get; set; }
-        public string UserAccount { get; set; }
+        public string CategoryId { get; set; }
+        public string UserId { get; set; }
         public int Status { get; set; }
+
+        [DisplayName("Upload file")]
+        public IFormFile Thumbnail { get; set; }
     }
 }

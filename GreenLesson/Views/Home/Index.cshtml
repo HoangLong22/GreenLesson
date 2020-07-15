@@ -80,7 +80,7 @@
                             <div class="col-md-3">
                                 <div class="course-carousel">
                                     <div class="course-box-wrap">
-                                        <a asp-action="Details" asp-route-id="@item.Id">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Details" asp-route-id="@item.Id">
                                             <div class="course-box">
                                                 <div class="course-image">
                                                     <img src="~/Uploads/@item.Thumbnail" alt="" class="img-fluid" style="width:auto; height:180px;">
@@ -88,8 +88,8 @@
                                                 <div class="course-details">
                                                     <h5 class="title">@Html.DisplayFor(modelItem => item.Title)</h5>
                                                     <p class="instructors">
-                                                        @Html.DisplayFor(modelItem => item.UserId)
-                                                        
+                                                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                                                        @Html.DisplayFor(modelItem => item.User.LastName)
                                                         <span class="rating">
                                                             <i class="fas fa-star filled"></i>&nbsp
                                                             <i class="fas fa-star filled"></i>
@@ -98,7 +98,7 @@
                                                             <i class="fas fa-star filled"></i>
                                                         </span>
                                                     </p>
-                                                    <p class="category text-right">Danh mục bài giảng</p>
+                                                    <p class="category text-right"> @Html.DisplayFor(modelItem => item.Category.Name)</p>
                                                 </div>
                                             </div>
                                         </a>

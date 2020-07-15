@@ -6,16 +6,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GreenLesson.Models;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace GreenLesson.Controllers
 {
     public class CoursesController : Controller
     {
         private readonly GreenlessonContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public CoursesController(GreenlessonContext context)
+        public CoursesController(GreenlessonContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Courses
@@ -32,8 +39,8 @@ namespace GreenLesson.Controllers
                 temp.Title = item.Title;
                 temp.Description = item.Description;
                 temp.Thumbnail = item.Thumbnail;
-                temp.CategoryName = item.Category.Name;
-                temp.UserAccount = item.User.Account;
+                temp.CategoryId = item.Category.Name;
+                temp.UserId = item.User.Account;
                 temp.Status = item.Status;
                 coursesViewModels.Add(temp);
             }
@@ -65,26 +72,53 @@ namespace GreenLesson.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Email");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Account");
             return View();
         }
-
-        // POST: Courses/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ShortDescription,Description,CategoryId,UserId,Thumbnail,Status")] Course course)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,CategoryId,UserId,Thumbnail,Status")] CoursesViewModel coursesViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
-                await _context.SaveChangesAsync();
+                if (coursesViewModel.Thumbnail != null && coursesViewModel.Thumbnail.Length > 0)
+                {
+                    var file = coursesViewModel.Thumbnail;
+                    var imagePath = @"\Upload\";
+                    var uploadPath = _env.WebRootPath + imagePath;
+
+                    if (!Directory.Exists(uploadPath))
+                    {
+                        Directory.CreateDirectory(uploadPath);
+                    }
+                    var uniqFileName = Guid.NewGuid().ToString();
+                    var FileName = Path.GetFileName(uniqFileName + "." + file.FileName.Split(".")[1].ToLower());
+                    string fullPath = uploadPath + FileName;
+                    imagePath += @"\";
+                    var filePath = @".." + Path.Combine(imagePath, FileName);
+
+                    using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+
+                    var courses = new Course();
+                    courses.Id = coursesViewModel.Id;
+                    courses.Title = coursesViewModel.Title;
+                    courses.Description = coursesViewModel.Description;
+                    courses.CategoryId = coursesViewModel.CategoryId;
+                    courses.UserId = coursesViewModel.UserId;
+                    courses.Status = coursesViewModel.Status;
+                    courses.Thumbnail = filePath;
+
+                    _context.Add(courses);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", course.CategoryId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Email", course.UserId);
-            return View(course);
+            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", coursesViewModel.CategoryId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Account", coursesViewModel.UserId);
+            return View(coursesViewModel);
         }
 
         // GET: Courses/Edit/5

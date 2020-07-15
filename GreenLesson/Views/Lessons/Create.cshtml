@@ -1,34 +1,13 @@
 ﻿@model GreenLesson.Models.Lesson
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Thêm mới ài giảng";
 }
 
 <h1>Soạn bài giảng</h1>
 
 <div class="row">
-    <div class="col-md-4">
-        <ul class="navbar-nav flex-grow-0">
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home" aria-hidden="true"></i> Trang chủ</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index"><i class="fab fa-adobe"></i> Danh mục</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index"><i class="fab fa-discourse"></i> Khoá học</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Lessons" asp-action="Index"><i class="fas fa-book"></i> Bài giảng</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Lessons" asp-action="Create"><i class="fa fa-file-text"></i> Soạn bài</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fab fa-accusoft"></i> Điều khoản</a>
-            </li>
-        </ul>
-    </div>
+ 
     <div class="col-md-8">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -68,26 +47,4 @@
 
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-        <!-- jQuery 3 -->
-        <script src="~/Content/adminlte/components/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap 3.3.7 -->
-        <script src="~/Content/adminlte/components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- FastClick -->
-        <script src="~/Content/adminlte/components/fastclick/lib/fastclick.js"></script>
-        <!-- AdminLTE App -->
-        <script src="~/Content/adminlte/dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="~/Content/adminlte/dist/js/demo.js"></script>
-        <!-- CK Editor -->
-        <script src="~/Content/adminlte/components/ckeditor/ckeditor.js"></script>
-        <!-- Bootstrap WYSIHTML5 -->
-        <script src="~/Content/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-        <script>
-            $(function () {
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace('editor1')
-                //bootstrap WYSIHTML5 - text editor
-                $('.input').wysihtml5()
-            })</script>
     }

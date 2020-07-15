@@ -22,7 +22,8 @@ namespace GreenLesson.Controllers
         GreenlessonContext db = new GreenlessonContext();
         public IActionResult Index()
         {
-            ViewBag.KhoaHocMoi = db.Course.OrderByDescending(c => c.Id).Take(4).ToList();
+            //ViewBag.KhoaHocMoi = db.Course.OrderByDescending(c => c.Id).Take(4).ToList();
+            ViewBag.KhoaHocMoi = db.Course.Include(c => c.User).Include(c => c.Category).Where(C => C.Status == 1).OrderByDescending(C => C.Id).Take(4).ToList();
             return View();
         }
 
@@ -31,7 +32,7 @@ namespace GreenLesson.Controllers
             return View();
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public async Task<IActionResult> ImageUpload(IFormFile file)
         {
             if (file != null && file.Length > 0)
@@ -56,7 +57,7 @@ namespace GreenLesson.Controllers
                 ViewData["FileLocation"] = filePạth;
             }
             return View("../Users/Create");
-        }
+        }*/
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

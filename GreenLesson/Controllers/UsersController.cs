@@ -63,9 +63,6 @@ namespace GreenLesson.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Thumbnail,Email,Phone,Password,RoleId,Status,Account")] UsersViewModel usersViewModel)
         {
-            // sao lai co 2 cai create vay
-            // co 1 cai thoi ma a
-            // cai nay no tu sinh ra khi e add controller
             if (ModelState.IsValid)
             {
                 if (usersViewModel.Thumbnail != null && usersViewModel.Thumbnail.Length > 0)
